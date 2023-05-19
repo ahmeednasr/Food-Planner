@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Food-Planner</string>
+    <string name="food_planner">Food-Planner</string>
+    <string name="hi_wlcome_to">Hi... Wlcome to</string>
+    <string name="welcom_to_login_page">welcom to login page</string>
 </resources>
