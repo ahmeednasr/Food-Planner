@@ -15,6 +15,22 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".WelcomActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SignUP.SignUpActivity"
+            android:exported="false"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/Theme.FoodPlanner.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainPage"
             android:exported="false">
             <meta-data

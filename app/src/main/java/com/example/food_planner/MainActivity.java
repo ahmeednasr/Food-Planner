@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.food_planner.Login.Login;
+import com.example.food_planner.SignUP.SignUpActivity;
 import com.example.food_planner.Splash_Screen.SplashScreen;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this, Login.class));
+                startActivity(new Intent(MainActivity.this, WelcomActivity.class));
                 finish();
             }
         },6000);
