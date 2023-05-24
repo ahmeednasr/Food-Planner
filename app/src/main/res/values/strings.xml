@@ -26,4 +26,10 @@
     <string name="username">userName</string>
     <string name="scrall">scrall</string>
     <string name="signinemail">SIGNIN WITHE-MAIL</string>
+    <string name="sign_in_with_e_mail">Sign in With E-mail</string>
+    <string name="sign_up_with_e_mail">Sign Up With E-mail</string>
+    <string name="addFav" />
+    <string name="addMealToFav">addMealToFav</string>
+    <string name="trrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhhhhhhhhhhhhtttttttttrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhh">trrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhhhhhhhhhhhhtttttttttrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhh</string>
+    <string name="todo">TODO</string>
 </resources>

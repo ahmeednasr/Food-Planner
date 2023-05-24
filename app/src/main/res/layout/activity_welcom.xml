@@ -15,23 +15,25 @@
         android:src="@drawable/welcompage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/login_id"
-        android:layout_width="63dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="12dp"
+        android:layout_width="72dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/autoregulation"
         android:minHeight="48dp"
         android:onClick="myOnClickMethod"
         android:text="@string/Login"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/signinwithemail"
+        app:layout_constraintEnd_toEndOf="@+id/signupemail_id"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -42,43 +44,39 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/nunitobold"
         android:text="Already have an account ?"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/signinwithemail"
+        app:layout_constraintStart_toStartOf="@+id/signupemail_id"
         app:layout_constraintTop_toTopOf="@+id/login_id"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/signinwithemail"
-        android:layout_width="338dp"
-        android:layout_height="61dp"
+        android:id="@+id/signupemail_id"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="24dp"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:text="@string/signinemail"
+        android:background="@drawable/buttonstyle"
         android:drawablePadding="8dp"
-        android:drawableWidth="10dp"
-        android:drawableHeight="10dp"
+        android:text="@string/sign_up_with_e_mail"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="@+id/signinwithemail"
-        app:layout_constraintTop_toTopOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.0" />
+    <ImageButton
+        android:id="@+id/signUpGoogle_id"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/buttonwitecolorstyle"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/signupemail_id"
+        app:layout_constraintEnd_toEndOf="@+id/signupemail_id"
+        app:layout_constraintStart_toStartOf="@+id/signupemail_id"
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ic_baseline_email_24"
-        app:layout_constraintBottom_toTopOf="@+id/signinwithemail"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/signinwithemail" />
+        app:srcCompat="@drawable/google"
+        tools:ignore="SpeakableTextPresentCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

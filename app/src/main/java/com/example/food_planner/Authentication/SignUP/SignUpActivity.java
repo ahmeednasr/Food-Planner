@@ -1,4 +1,4 @@
-package com.example.food_planner.SignUP;
+package com.example.food_planner.Authentication.SignUP;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -2,12 +2,8 @@ package com.example.food_planner.Splash_Screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
-import com.example.food_planner.Login.Login;
-import com.example.food_planner.MainActivity;
 import com.example.food_planner.R;
 
 public class SplashScreen extends AppCompatActivity {
