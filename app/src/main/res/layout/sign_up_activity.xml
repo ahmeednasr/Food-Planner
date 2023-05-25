@@ -94,17 +94,40 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/password_id" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/signupbtn_id"
-                android:layout_width="wrap_content"
+                android:layout_width="229dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/buttonstyle"
-                android:backgroundTint="#03A9F4"
                 android:fontFamily="@font/nunitoextrabold"
                 android:text="SignUp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Password"
+                app:layout_constraintBottom_toTopOf="@+id/signupbtn_id"
+                app:layout_constraintEnd_toEndOf="@+id/confirmPassword_id"
+                app:layout_constraintStart_toStartOf="@+id/confirmPassword_id"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPassword_id"
+                app:passwordToggleEnabled="true"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_input"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

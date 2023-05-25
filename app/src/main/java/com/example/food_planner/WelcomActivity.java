@@ -19,7 +19,7 @@ public class WelcomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcom);
         signUpGoogle=findViewById(R.id.signUpGoogle_id);
-        SignUpEmail=findViewById(R.id.signupemail_id);
+        SignUpEmail=findViewById(R.id.signUpEmailBtn);
 
         signUpGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
