@@ -32,4 +32,8 @@
     <string name="addMealToFav">addMealToFav</string>
     <string name="trrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhhhhhhhhhhhhtttttttttrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhh">trrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhhhhhhhhhhhhtttttttttrrrrrrrrrrrrrrrrrrrrrrrrrhhhhhhhh</string>
     <string name="todo">TODO</string>
+    <string name="confire_password">Confire Password</string>
+    <string name="confirm_password">confirm_password</string>
+    <string name="signup">SignUp</string>
+    <string name="confirmpassword">confirm Password</string>
 </resources>

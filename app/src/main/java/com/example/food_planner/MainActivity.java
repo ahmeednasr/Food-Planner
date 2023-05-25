@@ -15,9 +15,10 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this, WelcomActivity.class));
+                //real-->>> startActivity(new Intent(MainActivity.this, WelcomActivity.class));
+                /*for Test-->>*/startActivity(new Intent(MainActivity.this, NavigationController.class));
                 finish();
             }
-        },3000);
+        },2000);
     }
 }

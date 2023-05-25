@@ -14,11 +14,12 @@ import com.example.food_planner.Navigation.SearchFragment;
 import com.example.food_planner.Navigation.WeekPlanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainPage extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class NavigationController extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         loadFragment(new HomeFragment());

@@ -4,7 +4,7 @@
         <item name="android:screenOrientation">portrait</item>
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimary">@color/darkorange</item>
         <item name="colorPrimaryVariant">@color/darkorange</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->

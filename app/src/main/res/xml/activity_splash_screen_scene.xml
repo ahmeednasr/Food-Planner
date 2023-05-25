@@ -12,7 +12,7 @@
        </KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet>
         <Constraint
             android:id="@+id/backgroundLayout"
             motion:layout_constraintEnd_toEndOf="parent"

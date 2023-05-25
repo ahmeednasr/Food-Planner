@@ -15,27 +15,10 @@
         android:src="@drawable/welcompage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/login_id"
-        android:layout_width="72dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/autoregulation"
-        android:minHeight="48dp"
-        android:onClick="myOnClickMethod"
-        android:text="@string/Login"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/signUpEmailBtn"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView3"
@@ -47,9 +30,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/signUpEmailBtn"
-        app:layout_constraintTop_toTopOf="@+id/login_id"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/signUpEmailBtn" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpEmailBtn"
@@ -82,4 +63,34 @@
         app:srcCompat="@drawable/google"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginBtn_id"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/buttonstyle"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/nunitoextrabold"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/skipBtn_id"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/buttonstyle"
+        android:drawableRight="@drawable/ic_round_arrow_forward_ios_24"
+        android:fontFamily="@font/nunitoextrabold"
+        android:text="Skip"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
