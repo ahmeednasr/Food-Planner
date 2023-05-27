@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Navigation.WeekPlanFragment">
+    android:id="@+id/weeklyFragment"
+    tools:context=".Main.WeekPlan.WeekPlanFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

@@ -6,22 +6,36 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.food_planner.Navigation.HomeFragment"
-        android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
-    <fragment
-        android:id="@+id/savedMealsFragment"
-        android:name="com.example.food_planner.Navigation.SavedMealsFragment"
-        android:label="saved_meals_fragment"
-        tools:layout="@layout/saved_meals_fragment" />
-    <fragment
-        android:id="@+id/weekPlanFragment"
-        android:name="com.example.food_planner.Navigation.WeekPlanFragment"
-        android:label="week_plan_fragment"
-        tools:layout="@layout/week_plan_fragment" />
+        android:name="com.example.food_planner.Main.HomePage.HomeView.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/home_fragment">
+
+        <action
+            android:id="@+id/action_homeFragment_to_viewMeal"
+            app:destination="@id/viewMeal" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.food_planner.Navigation.SearchFragment"
-        android:label="search_fragment"
+        android:name="com.example.food_planner.Main.Search.SearchFragment"
+        android:label="@string/search"
         tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/weeklyFragment"
+        android:name="com.example.food_planner.Main.WeekPlan.WeekPlanFragment"
+        android:label="week plan"
+        tools:layout="@layout/week_plan_fragment" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.example.food_planner.Main.SavedMeals.SavedMealsFragment"
+        android:label="saved meals"
+        tools:layout="@layout/saved_meals_fragment" />
+    <fragment
+        android:id="@+id/viewMeal"
+        android:name="com.example.food_planner.ViewMeal"
+        android:label="Meal"
+        tools:layout="@layout/view_meal_fragment">
+        <argument
+            android:name="meal"
+            app:argType="com.example.food_planner.MealDTO" />
+    </fragment>
 </navigation>

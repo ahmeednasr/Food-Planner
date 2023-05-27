@@ -1,4 +1,4 @@
-package com.example.food_planner.Navigation;
+package com.example.food_planner.Main.WeekPlan;
 
 import android.os.Bundle;
 
