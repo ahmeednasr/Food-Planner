@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        getSupportActionBar().hide();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

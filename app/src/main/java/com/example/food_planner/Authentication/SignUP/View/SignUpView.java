@@ -1,4 +1,4 @@
-package com.example.food_planner.Authentication.SignUP;
+package com.example.food_planner.Authentication.SignUP.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpView extends AppCompatActivity {
     private FirebaseAuth mAuth=null;
     private static final String TAG = "EmailPassword";
     TextInputEditText userName,eMail,password,confirmPassword;
@@ -67,11 +65,11 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignUpActivity.this, "Sign up successful",
+                            Toast.makeText(SignUpView.this, "Sign up successful",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                            Toast.makeText(SignUpView.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -86,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Sign up failed.",
+                            Toast.makeText(SignUpView.this, "Sign up failed.",
                                     Toast.LENGTH_SHORT).show();
 
                         }
@@ -97,22 +95,22 @@ public class SignUpActivity extends AppCompatActivity {
             boolean isValid = true;
             if (userNameValue.trim().isEmpty()) {
                 isValid = false;
-                Toast.makeText(SignUpActivity.this, "Username is required",
+                Toast.makeText(SignUpView.this, "Username is required",
                     Toast.LENGTH_SHORT).show();
             }
             if (!emailValue.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
                 isValid = false;
-                Toast.makeText(SignUpActivity.this, "Invalid email format",
+                Toast.makeText(SignUpView.this, "Invalid email format",
                     Toast.LENGTH_SHORT).show();
             }
             if (passwordValue.length() < 8) {
                 isValid = false;
-                Toast.makeText(SignUpActivity.this, "Password should be at least 8 characters long",
+                Toast.makeText(SignUpView.this, "Password should be at least 8 characters long",
                     Toast.LENGTH_SHORT).show();
             }
             if (!passwordValue.equals(confirmPasswordValue)) {
                 isValid = false;
-                Toast.makeText(SignUpActivity.this, "Passwords do not match\"",
+                Toast.makeText(SignUpView.this, "Passwords do not match\"",
                     Toast.LENGTH_SHORT).show();
             }
             return isValid;

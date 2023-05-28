@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.food_planner.Authentication.Login.Login;
-import com.example.food_planner.Authentication.SignUP.SignUpActivity;
+import com.example.food_planner.Authentication.Login.View.LoginView;
+import com.example.food_planner.Authentication.SignUP.View.SignUpView;
 
 public class WelcomActivity extends AppCompatActivity {
     ImageButton signUpGoogle;
@@ -18,7 +18,6 @@ public class WelcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
-        getSupportActionBar().hide();
         signUpGoogle=findViewById(R.id.signUpGoogle_id);
         signUpEmailBtn=findViewById(R.id.signUpEmailBtn);
         loginBtn=findViewById(R.id.loginBtn_id);
@@ -31,7 +30,7 @@ public class WelcomActivity extends AppCompatActivity {
         signUpEmailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(WelcomActivity.this, SignUpView.class);
                 // Add the FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_NEW_TASK flags to the Intent
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 // Start the target activity
@@ -41,7 +40,7 @@ public class WelcomActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomActivity.this, Login.class);
+                Intent intent = new Intent(WelcomActivity.this, LoginView.class);
                 // Add the FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_NEW_TASK flags to the Intent
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 // Start the target activity

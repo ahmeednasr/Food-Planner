@@ -11,4 +11,6 @@
     <color name="gray">#808080</color>
     <color name="orange">#ffa500</color>
     <color name="darkorange">#ff6500</color>
+    <color name="red">#FF0000</color>
+    <color name="lightgreen">#7CFC00</color>
 </resources>

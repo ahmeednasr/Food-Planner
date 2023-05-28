@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FoodPlanner" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.FoodPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:screenOrientation">portrait</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/darkorange</item>
-        <item name="colorPrimaryVariant">@color/darkorange</item>
+        <item name="colorPrimaryVariant">@color/orange</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,12 +15,7 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/nunitoregular</item>
         <item name="android:fontFamily">@font/nunitoregular</item>
+    </style>
 
-    </style>
-    <style name="Theme.FoodPlanner.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="Theme.FoodPlanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.FoodPlanner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
