@@ -18,6 +18,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,7 +49,6 @@ public class ViewMeal extends Fragment {
         ingrediant=view.findViewById(R.id.mealIngredients);
         imageView=view.findViewById(R.id.mealImage_id);
         mealDTO=ViewMealArgs.fromBundle(getArguments()).getMeal();
-        Toast.makeText(getContext(), "mealGetsData sucss"+mealDTO.getStrMealDetails().get(3), Toast.LENGTH_SHORT).show();
         Glide.with(getContext()).load(mealDTO.getStrMealThumb())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
@@ -61,9 +62,19 @@ public class ViewMeal extends Fragment {
         getLifecycle().addObserver(youTubePlayerView);
         getYoutubeVideo();
         StringBuilder sb = new StringBuilder();
-        for (String element : mealDTO.getStrMealDetails()) {
-            sb.append(element);
-            sb.append("\n"); // add a newline character after each element
+        for (int i = 1; i <= 20; i++) {
+            String ingredients = null;
+            String measure=null;
+            try {
+                ingredients = mealDTO.getClass().getMethod("getStrIngredient" + i).invoke(mealDTO).toString();
+                 measure = mealDTO.getClass().getMethod("getStrMeasure" + i).invoke(mealDTO).toString();
+              if(!ingredients.isEmpty()&&!measure.isEmpty()){
+                  sb.append(ingredients).append(": ").append(measure).append("\n");
+              }
+
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
         ingrediant.setText(sb.toString());
     }

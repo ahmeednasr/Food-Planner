@@ -1,15 +1,15 @@
 package com.example.food_planner.Authentication.Login.Presenter;
 
 import com.example.food_planner.Authentication.AuthListener;
-import com.example.food_planner.Authentication.AuthModel.LoginModelInterFace;
+import com.example.food_planner.Authentication.AuthModel.AuthModelInterFace;
 import com.example.food_planner.Authentication.Login.View.LoginViewInterface;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AuthPresenter implements LoginPresenterInterFace, AuthListener {
+public class LoginPresenter implements LoginPresenterInterFace, AuthListener {
     LoginViewInterface _view;
-    LoginModelInterFace _model;
+    AuthModelInterFace _model;
 
-    public AuthPresenter(LoginViewInterface _view, LoginModelInterFace _model) {
+    public LoginPresenter(LoginViewInterface _view, AuthModelInterFace _model) {
         this._view = _view;
         this._model = _model;
     }

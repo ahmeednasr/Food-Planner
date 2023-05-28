@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.food_planner.Authentication.AuthModel.LoginModel;
-import com.example.food_planner.Authentication.Login.Presenter.AuthPresenter;
+import com.example.food_planner.Authentication.AuthModel.AuthModel;
+import com.example.food_planner.Authentication.Login.Presenter.LoginPresenter;
 import com.example.food_planner.Main.MainNavigation;
 import com.example.food_planner.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,7 +23,7 @@ public class LoginView extends AppCompatActivity implements LoginViewInterface {
     AppCompatButton loginBtn;
     TextInputEditText eMail, password;
     LottieAnimationView animationView;
-    AuthPresenter presenter;
+    LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class LoginView extends AppCompatActivity implements LoginViewInterface {
                 if (isValid) {
                     animationView.setAnimation("loading.json");
                     animationView.resumeAnimation();
-                    presenter = new AuthPresenter(LoginView.this, LoginModel.getInstance());
+                    presenter = new LoginPresenter(LoginView.this, AuthModel.getInstance());
                     presenter.login(eMailValue, passwordValue);
                 }
             }
