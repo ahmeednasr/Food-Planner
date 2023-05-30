@@ -1,9 +1,6 @@
 package com.example.food_planner.Authentication;
 
-import com.example.food_planner.MealDTO;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class UserDTO implements Serializable {
     String userName;

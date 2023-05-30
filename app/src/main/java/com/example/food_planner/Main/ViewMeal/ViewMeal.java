@@ -1,4 +1,4 @@
-package com.example.food_planner;
+package com.example.food_planner.Main.ViewMeal;
 
 import android.os.Bundle;
 
@@ -11,21 +11,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.food_planner.MealModel.MealModel;
+import com.example.food_planner.R;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ViewMeal extends Fragment {
     TextView mealName,area,category,instractions,ingrediant;
-    MealDTO mealDTO;
+    MealModel mealModel;
     AppCompatImageView imageView;
     YouTubePlayerView youTubePlayerView;
     @Override
@@ -48,16 +49,18 @@ public class ViewMeal extends Fragment {
         instractions=view.findViewById(R.id.instractionsValue);
         ingrediant=view.findViewById(R.id.mealIngredients);
         imageView=view.findViewById(R.id.mealImage_id);
-        mealDTO=ViewMealArgs.fromBundle(getArguments()).getMeal();
-        Glide.with(getContext()).load(mealDTO.getStrMealThumb())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_foreground)
-                .into(imageView);
 
-        mealName.setText(mealDTO.getStrMeal());
-        area.setText(mealDTO.getStrArea());
-        category.setText(mealDTO.getStrCategory());
-        instractions.setText(mealDTO.getStrInstructions());
+        mealModel=ViewMealArgs.fromBundle(getArguments()).getMeal();
+
+        Glide.with(getContext()).load(mealModel.getStrMealThumb())
+                .apply(new RequestOptions().override(400,300))
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_background).into(imageView);
+
+        mealName.setText(mealModel.getStrMeal());
+        area.setText(mealModel.getStrArea());
+        category.setText(mealModel.getStrCategory());
+        instractions.setText(mealModel.getStrInstructions());
         youTubePlayerView = view.findViewById(R.id.youtube_player_view);
         getLifecycle().addObserver(youTubePlayerView);
         getYoutubeVideo();
@@ -66,8 +69,8 @@ public class ViewMeal extends Fragment {
             String ingredients = null;
             String measure=null;
             try {
-                ingredients = mealDTO.getClass().getMethod("getStrIngredient" + i).invoke(mealDTO).toString();
-                 measure = mealDTO.getClass().getMethod("getStrMeasure" + i).invoke(mealDTO).toString();
+                ingredients = mealModel.getClass().getMethod("getStrIngredient" + i).invoke(mealModel).toString();
+                 measure = mealModel.getClass().getMethod("getStrMeasure" + i).invoke(mealModel).toString();
               if(!ingredients.isEmpty()&&!measure.isEmpty()){
                   sb.append(ingredients).append(": ").append(measure).append("\n");
               }
@@ -93,10 +96,9 @@ public class ViewMeal extends Fragment {
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
-                String videoId = extractVideoIdFromLink(mealDTO.getStrYoutube());
+                String videoId = extractVideoIdFromLink(mealModel.getStrYoutube());
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
-
     }
 }

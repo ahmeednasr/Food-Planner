@@ -3,7 +3,6 @@
     <!-- Selected state -->
     <item android:color="@color/darkorange"
         android:state_checked="true" />
-
     <!-- Default state -->
     <item android:color="@color/gray" />
 </selector>

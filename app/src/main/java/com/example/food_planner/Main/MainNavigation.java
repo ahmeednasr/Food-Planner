@@ -29,4 +29,5 @@ public class MainNavigation extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
+
 }

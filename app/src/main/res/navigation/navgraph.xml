@@ -6,13 +6,16 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.food_planner.Main.HomePage.HomeView.HomeFragment"
+        android:name="com.example.food_planner.Main.HomePage.HomeView.HomeView"
         android:label="@string/home"
         tools:layout="@layout/home_fragment">
 
         <action
             android:id="@+id/action_homeFragment_to_viewMeal"
             app:destination="@id/viewMeal" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewAllMeals"
+            app:destination="@id/viewAllMeals" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -31,11 +34,24 @@
         tools:layout="@layout/saved_meals_fragment" />
     <fragment
         android:id="@+id/viewMeal"
-        android:name="com.example.food_planner.ViewMeal"
+        android:name="com.example.food_planner.Main.ViewMeal.ViewMeal"
         android:label="Meal"
         tools:layout="@layout/view_meal_fragment">
         <argument
             android:name="meal"
-            app:argType="com.example.food_planner.MealDTO" />
+            app:argType="com.example.food_planner.MealModel.MealModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllMeals"
+        android:name="com.example.food_planner.Main.ViewAllMeals.View.ViewAllMeals"
+        android:label="view_all_meals_fragment"
+        tools:layout="@layout/view_all_meals_fragment" >
+        <action
+            android:id="@+id/action_viewAllMeals_to_viewMeal"
+            app:destination="@id/viewMeal" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument android:name="Value" />
     </fragment>
 </navigation>

@@ -13,4 +13,7 @@
     <color name="darkorange">#ff6500</color>
     <color name="red">#FF0000</color>
     <color name="lightgreen">#7CFC00</color>
+    <color name="LightdarkGreen">#1f2c34</color>
+    <color name="darkGreen">#121b22</color>
+    <color name="dark">#17262B</color>
 </resources>
