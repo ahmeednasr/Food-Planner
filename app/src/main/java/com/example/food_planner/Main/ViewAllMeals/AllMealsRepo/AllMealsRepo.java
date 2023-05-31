@@ -1,7 +1,7 @@
 package com.example.food_planner.Main.ViewAllMeals.AllMealsRepo;
 
-import com.example.food_planner.Main.Network.RemoteSource;
-import com.example.food_planner.Main.Network.getMealsNetworkDelagate;
+import com.example.food_planner.Network.RemoteSource;
+import com.example.food_planner.Network.getMealsNetworkDelagate;
 
 public class AllMealsRepo implements AllMealsRepoInterface{
     RemoteSource remoteSource;

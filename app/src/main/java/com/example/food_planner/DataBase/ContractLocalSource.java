@@ -53,4 +53,10 @@ public class ContractLocalSource implements LocalSource {
     public LiveData<List<MealModel>> getAllStoredMeal() {
         return storedMeals;
     }
+
+    @Override
+    public MealModel getImageCached() {
+
+        return null;
+    }
 }

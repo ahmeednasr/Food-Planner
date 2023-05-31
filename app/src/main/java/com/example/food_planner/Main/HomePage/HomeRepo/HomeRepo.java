@@ -1,7 +1,7 @@
 package com.example.food_planner.Main.HomePage.HomeRepo;
 
-import com.example.food_planner.Main.Network.NetworkDelegate;
-import com.example.food_planner.Main.Network.RemoteSource;
+import com.example.food_planner.Network.NetworkDelegate;
+import com.example.food_planner.Network.RemoteSource;
 
 public class HomeRepo implements HomeRepoInterface{
     RemoteSource _remoteSource;

@@ -10,4 +10,5 @@ public interface LocalSource {
     void insertMeal(MealModel meal);
     void deleteMeal(MealModel meal);
     LiveData<List<MealModel>> getAllStoredMeal();
+    MealModel getImageCached();
 }

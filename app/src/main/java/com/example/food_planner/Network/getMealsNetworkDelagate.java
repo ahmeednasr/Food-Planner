@@ -1,4 +1,4 @@
-package com.example.food_planner.Main.Network;
+package com.example.food_planner.Network;
 
 import com.example.food_planner.Main.ViewAllMeals.AllMealModel.MealsItemThumb;
 import com.example.food_planner.MealModel.MealModel;

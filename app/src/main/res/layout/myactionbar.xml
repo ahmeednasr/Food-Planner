@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/darkorange"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <!-- Menu item with icon -->
+    <ImageView
+        android:id="@+id/my_menu_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/settings"
+        android:src="@drawable/logo"
+        app:srcCompat="@drawable/ic_baseline_menu_24" />
+
+</androidx.appcompat.widget.Toolbar>

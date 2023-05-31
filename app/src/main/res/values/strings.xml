@@ -37,4 +37,5 @@
     <string name="signup">SignUp</string>
     <string name="confirmpassword">confirm Password</string>
     <string name="nameofmeal">nameOfMeal</string>
+    <string name="settings">settings</string>
 </resources>

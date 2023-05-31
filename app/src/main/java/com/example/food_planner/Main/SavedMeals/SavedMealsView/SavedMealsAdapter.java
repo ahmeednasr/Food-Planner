@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,11 +29,13 @@ public class SavedMealsAdapter extends RecyclerView.Adapter<SavedMealsAdapter.Vi
     Context context;
     List<MealModel> meals;
     onSavedMealsClickListener listener;
+    boolean connection;
 
-    public SavedMealsAdapter(Context context, List<MealModel> meals, onSavedMealsClickListener listener) {
+    public SavedMealsAdapter(Context context, List<MealModel> meals, onSavedMealsClickListener listener,boolean connection) {
         this.context = context;
         this.meals = meals;
         this.listener = listener;
+        this.connection=connection;
     }
     public void setList(List<MealModel> updatedmeals){
         this.meals=updatedmeals;
@@ -46,7 +49,7 @@ public class SavedMealsAdapter extends RecyclerView.Adapter<SavedMealsAdapter.Vi
         CardView cardView;
         ImageView mealImage;
         TextView mealName;
-        Button removeBtn;
+        AppCompatButton removeBtn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view=itemView;
@@ -75,17 +78,20 @@ public class SavedMealsAdapter extends RecyclerView.Adapter<SavedMealsAdapter.Vi
                 .apply(new RequestOptions().override(300,250))
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background).into(holder.mealImage);
+        if(!connection){
+            holder.removeBtn.setVisibility(View.GONE);
+        }
         holder.removeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,meals.get(position).getStrMeal(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,meals.get(position).getStrMeal()+" deleted",Toast.LENGTH_SHORT).show();
                 listener.onRemove(meals.get(position));
             }
         });
+
         holder.mealImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,meals.get(position).getStrMeal(),Toast.LENGTH_SHORT).show();
                 listener.onclick(meals.get(position));
             }
         });

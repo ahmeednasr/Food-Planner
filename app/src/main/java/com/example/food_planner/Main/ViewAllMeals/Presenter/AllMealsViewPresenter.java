@@ -1,8 +1,6 @@
 package com.example.food_planner.Main.ViewAllMeals.Presenter;
 
-import android.widget.Toast;
-
-import com.example.food_planner.Main.Network.getMealsNetworkDelagate;
+import com.example.food_planner.Network.getMealsNetworkDelagate;
 import com.example.food_planner.Main.ViewAllMeals.AllMealModel.MealsItemThumb;
 import com.example.food_planner.Main.ViewAllMeals.AllMealsRepo.AllMealsRepoInterface;
 import com.example.food_planner.Main.ViewAllMeals.View.AllMealsViewInterface;

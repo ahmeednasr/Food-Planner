@@ -1,4 +1,4 @@
-package com.example.food_planner.Authentication;
+package com.example.food_planner;
 
 import com.example.food_planner.MealModel.MealModel;
 
@@ -9,11 +9,13 @@ public class UserDTO implements Serializable {
     String userName;
     String email;
     List<MealModel> meals;
+     List<DayDTO> weekPlan;
 
-    public UserDTO(String userName, String email, List<MealModel> meals) {
+    public UserDTO(String userName, String email, List<MealModel> meals, List<DayDTO> weekPlan) {
         this.userName = userName;
         this.email = email;
         this.meals = meals;
+        this.weekPlan = weekPlan;
     }
 
     public String getUserName() {
@@ -38,5 +40,13 @@ public class UserDTO implements Serializable {
 
     public void setMeals(List<MealModel> meals) {
         this.meals = meals;
+    }
+
+    public List<DayDTO> getWeekPlan() {
+        return weekPlan;
+    }
+
+    public void setWeekPlan(List<DayDTO> weekPlan) {
+        this.weekPlan = weekPlan;
     }
 }

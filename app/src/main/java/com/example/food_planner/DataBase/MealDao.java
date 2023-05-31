@@ -17,7 +17,6 @@ public interface MealDao {
     void insertMeal(MealModel meal);
     @Delete
     void deleteMeal(MealModel meal);
-
     @Query("SELECT * From mealmodel")
     LiveData<List<MealModel>> gatAllMeals();
 }

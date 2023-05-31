@@ -13,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
+        android:elevation="20dp"
         app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
+        app:cardElevation="10dp"
         app:cardMaxElevation="10dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="false"
@@ -27,7 +28,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/savedmealImage_id"
@@ -40,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.18"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_launcher_foreground"
                 tools:ignore="ImageContrastCheck" />
 
@@ -48,26 +50,29 @@
                 android:id="@+id/savedmealNameCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:fontFamily="@font/nunitoextrabold"
                 android:paddingStart="10dp"
                 android:paddingEnd="20dp"
                 android:text="@string/nameofmeal"
                 android:textColor="@color/gray"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rmBtn"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/savedmealImage_id" />
+                app:layout_constraintTop_toTopOf="@+id/rmBtn" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/rmBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:background="#FF0000"
+
+                android:elevation="20dp"
                 android:text="remove"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/savedmealImage_id" />

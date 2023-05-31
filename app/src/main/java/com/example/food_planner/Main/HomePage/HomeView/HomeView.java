@@ -1,6 +1,9 @@
 package com.example.food_planner.Main.HomePage.HomeView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,31 +30,33 @@ import com.example.food_planner.Main.HomePage.HomePresenter.HomePresenterInterfa
 import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaItem;
 import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryItem;
 import com.example.food_planner.Main.HomePage.HomeRepo.HomeRepo;
-import com.example.food_planner.Main.Network.ApiClient;
+import com.example.food_planner.Network.ApiClient;
 import com.example.food_planner.MealModel.MealModel;
 import com.example.food_planner.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeView extends Fragment implements HomeViewInterface, OnAreaClickListener,OnCategoryClickListner {
+public class HomeView extends Fragment implements HomeViewInterface, OnAreaClickListener, OnCategoryClickListner {
     private ProgressDialog progressDialog;
-
+    NetworkInfo networkInfo;
+    ConnectivityManager connMgr;
     CardView mealOfDay;
     ImageView imageMeal;
-    TextView mealName;
+    TextView mealName,mealOfday,area,category;
     HomePresenterInterface presenterInterface;
-    RecyclerView areaRecycleView,categoryRecycleView;
+    RecyclerView areaRecycleView, categoryRecycleView;
     AreaAdabter areaAdapter;
     CategoryAdabter categoryAdapter;
-    LinearLayoutManager areaLayoutManager,categoryLayoutManager;
-    MealModel meal;
+    LinearLayoutManager areaLayoutManager, categoryLayoutManager;
+    MealModel meal = null;
     private NavController controller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,58 +66,76 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        controller=Navigation.findNavController(view);
+         connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+         networkInfo = connMgr.getActiveNetworkInfo();
+        controller = Navigation.findNavController(view);
         InitUI(view);
-        presenterInterface=new HomePresenter(this,
-                HomeRepo.getInstance(ApiClient.getInstance()));
 
-        presenterInterface.getMealOfDay();
-        presenterInterface.getArea();
-        presenterInterface.getCategory();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            presenterInterface = new HomePresenter(this,
+                    HomeRepo.getInstance(ApiClient.getInstance()));
+            presenterInterface.getMealOfDay();
+            presenterInterface.getArea();
+            presenterInterface.getCategory();
+        } else {
+            Toast.makeText(getContext(), "no connection", Toast.LENGTH_SHORT).show();
+            mealOfDay.setEnabled(false);
+        }
+
+
         mealOfDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Tag","onclick "+meal.getStrMeal());
-                controller.navigate(HomeViewDirections.actionHomeFragmentToViewMeal(meal));
+                if (meal != null) {
+                    Log.d("Tag", "onclick " + meal.getStrMeal());
+                    controller.navigate(HomeViewDirections.actionHomeFragmentToViewMeal(meal, "HOME"));
+                }
             }
         });
     }
 
-    void InitUI(View view){
-        mealOfDay=view.findViewById(R.id.mealCard);
-        imageMeal=view.findViewById(R.id.mealImage_id);
-        mealName=view.findViewById(R.id.mealNameCard);
-        areaRecycleView =view.findViewById(R.id.areaRecyclerView);
-        categoryRecycleView=view.findViewById(R.id.CategoryRecyclerView);
-
-        areaLayoutManager=new LinearLayoutManager(getContext());
-        areaAdapter=new AreaAdabter(getContext(),new ArrayList<>(),this);
+    void InitUI(View view) {
+        mealOfday=view.findViewById(R.id.mealOfDay);
+        area=view.findViewById(R.id.area);
+        category=view.findViewById(R.id.category);
+        mealOfDay = view.findViewById(R.id.mealCard);
+        imageMeal = view.findViewById(R.id.mealImage_id);
+        mealName = view.findViewById(R.id.mealNameCard);
+        areaRecycleView = view.findViewById(R.id.areaRecyclerView);
+        categoryRecycleView = view.findViewById(R.id.CategoryRecyclerView);
+        areaLayoutManager = new LinearLayoutManager(getContext());
+        areaAdapter = new AreaAdabter(getContext(), new ArrayList<>(), this);
         areaRecycleView.setLayoutManager(areaLayoutManager);
         areaRecycleView.setAdapter(areaAdapter);
         areaLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-
-        categoryLayoutManager=new LinearLayoutManager(getContext());
-        categoryAdapter=new CategoryAdabter(getContext(),new ArrayList<>(),this);
+        categoryLayoutManager = new LinearLayoutManager(getContext());
+        categoryAdapter = new CategoryAdabter(getContext(), new ArrayList<>(), this);
         categoryRecycleView.setLayoutManager(categoryLayoutManager);
         categoryRecycleView.setAdapter(categoryAdapter);
         categoryLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         areaRecycleView.setHasFixedSize(true);
         categoryRecycleView.setHasFixedSize(true);
+        areaRecycleView.setVisibility(View.GONE);
+        categoryRecycleView.setVisibility(View.GONE);
+        imageMeal.setVisibility(View.GONE);
+        mealName.setVisibility(View.GONE);
+
     }
 
     @Override
     public void getMealOfDay(MealModel model) {
         mealName.setText(model.getStrMeal());
         Glide.with(getContext()).load(model.getStrMealThumb())
-                .apply(new RequestOptions().override(400,300))
+                .apply(new RequestOptions().override(400, 300))
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background).into(imageMeal);
-        meal=model;
+        meal = model;
+        imageMeal.setVisibility(View.VISIBLE);
+        mealName.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -119,14 +143,15 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
         areaAdapter.setList(areaList);
         areaAdapter.notifyDataSetChanged();
         dismissProgressDialog();
+        areaRecycleView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showCategory(List<CategoryItem> categoryList) {
-
         categoryAdapter.setList(categoryList);
         categoryAdapter.notifyDataSetChanged();
         dismissProgressDialog();
+        categoryRecycleView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -135,9 +160,10 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
     }
 
     @Override
-    public void onAreaClick(String areaItem,String type) {
-        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(type,areaItem));
+    public void onAreaClick(String areaItem, String type) {
+        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(type, areaItem));
     }
+
     private void dismissProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
@@ -145,7 +171,7 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
     }
 
     @Override
-    public void onCategoryClick(String categoryItem,String type) {
-        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(type,categoryItem));
+    public void onCategoryClick(String categoryItem, String type) {
+        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(type, categoryItem));
     }
 }

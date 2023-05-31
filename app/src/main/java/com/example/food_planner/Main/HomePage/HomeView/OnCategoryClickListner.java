@@ -4,5 +4,4 @@ import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryIte
 
 public interface OnCategoryClickListner {
     void onCategoryClick(String categoryItem,String type);
-
 }

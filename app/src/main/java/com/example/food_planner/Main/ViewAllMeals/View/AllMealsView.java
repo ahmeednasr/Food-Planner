@@ -17,8 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.food_planner.Main.HomePage.HomeView.HomeViewDirections;
-import com.example.food_planner.Main.Network.ApiClient;
+import com.example.food_planner.Network.ApiClient;
 import com.example.food_planner.Main.ViewAllMeals.AllMealModel.MealsItemThumb;
 import com.example.food_planner.Main.ViewAllMeals.AllMealsRepo.AllMealsRepo;
 import com.example.food_planner.Main.ViewAllMeals.Presenter.AllMealsViewPresenter;
@@ -74,7 +73,7 @@ public class AllMealsView extends Fragment implements AllMealsViewInterface,OnMe
     @Override
     public void getMeal(MealModel meal) {
        Log.i("TAG","OK meal name: "+meal.getStrMeal());
-       controller.navigate(AllMealsViewDirections.actionViewAllMealsToViewMeal(meal));
+       controller.navigate(AllMealsViewDirections.actionViewAllMealsToViewMeal(meal,"ALLMEALS"));
     }
     @Override
     public void responseMsg(String msg) {

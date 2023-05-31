@@ -30,6 +30,7 @@ public class WelcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
+        getSupportActionBar().hide();
         signUpGoogle=findViewById(R.id.signUpGoogle_id);
         signUpEmailBtn=findViewById(R.id.signUpEmailBtn);
         loginBtn=findViewById(R.id.loginBtn_id);

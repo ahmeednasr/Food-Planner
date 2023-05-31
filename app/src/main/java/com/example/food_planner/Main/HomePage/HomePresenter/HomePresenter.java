@@ -6,7 +6,7 @@ import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaResponse;
 import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryResponse;
 import com.example.food_planner.Main.HomePage.HomeRepo.HomeRepoInterface;
 import com.example.food_planner.Main.HomePage.HomeView.HomeViewInterface;
-import com.example.food_planner.Main.Network.NetworkDelegate;
+import com.example.food_planner.Network.NetworkDelegate;
 import com.example.food_planner.MealModel.MealModel;
 
 public class HomePresenter implements HomePresenterInterface, NetworkDelegate {

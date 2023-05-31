@@ -28,6 +28,8 @@ public class SignUpView extends AppCompatActivity implements SignUPViewInterface
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_activity);
+        getSupportActionBar().hide();
+
         initUI();
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override

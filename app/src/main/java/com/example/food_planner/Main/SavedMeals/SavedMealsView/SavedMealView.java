@@ -1,5 +1,8 @@
 package com.example.food_planner.Main.SavedMeals.SavedMealsView;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,30 +51,29 @@ public class SavedMealView extends Fragment implements onSavedMealsClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        initUI(view);
+        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+       boolean connection=(networkInfo != null && networkInfo.isConnected());
+        initUI(view,connection);
         presenter=new SavedMealsPresenter(this, SavedMealsrepo.getInstance(ContractLocalSource.getInstance(getContext()),getContext()));
         presenter.getSavedMeals().observe(getViewLifecycleOwner(), new Observer<List<MealModel>>() {
             @Override
             public void onChanged(List<MealModel> products) {
-                // Update the data in the adapter
                 showMeals(products);
             }
         });
     }
-    private void initUI(View view) {
+    private void initUI(View view,boolean connection) {
         controller= Navigation.findNavController(view);
         recyclerView = view.findViewById(R.id.savedMealsRecycler);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new SavedMealsAdapter(getContext(), new ArrayList<>(), this);
+        adapter = new SavedMealsAdapter(getContext(), new ArrayList<>(), this,connection);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
-
     @Override
     public void onclick(MealModel meal) {
-        controller.navigate(SavedMealViewDirections.actionSavedFragmentToViewMeal(meal));
-
+        controller.navigate(SavedMealViewDirections.actionSavedFragmentToViewMeal(meal,"ROOM"));
     }
 
     @Override

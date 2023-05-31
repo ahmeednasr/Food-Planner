@@ -74,7 +74,6 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,meals.get(position).getStrMeal(),Toast.LENGTH_SHORT).show();
                listener.onClick(meals.get(position).getIdMeal());
             }
         });

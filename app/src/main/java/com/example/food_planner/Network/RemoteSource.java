@@ -1,4 +1,4 @@
-package com.example.food_planner.Main.Network;
+package com.example.food_planner.Network;
 
 public interface RemoteSource {
     void enqueueAreasCall(NetworkDelegate networkDelegate);

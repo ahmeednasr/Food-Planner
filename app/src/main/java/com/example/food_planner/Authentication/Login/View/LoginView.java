@@ -29,6 +29,8 @@ public class LoginView extends AppCompatActivity implements LoginViewInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        getSupportActionBar().hide();
+
         initUI();
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

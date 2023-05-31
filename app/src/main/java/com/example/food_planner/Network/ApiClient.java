@@ -1,4 +1,4 @@
-package com.example.food_planner.Main.Network;
+package com.example.food_planner.Network;
 
 import android.util.Log;
 

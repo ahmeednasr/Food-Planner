@@ -1,4 +1,4 @@
-package com.example.food_planner.Main.Network;
+package com.example.food_planner.Network;
 
 import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaResponse;
 import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryResponse;
@@ -24,6 +24,9 @@ public interface ApiService {
 
     @GET("filter.php")
     Call<ResponseMealItemThumb> getMealByArea(@Query("a") String area);
+
+    @GET("filter.php")
+    Call<ResponseMealItemThumb> getMealByIngredient(@Query("i") String ingredient);
 
     @GET("lookup.php")
     Call<MealResponse> getMealById(@Query("i") String id);
