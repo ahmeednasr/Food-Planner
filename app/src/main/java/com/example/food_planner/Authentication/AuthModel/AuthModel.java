@@ -4,11 +4,13 @@ import android.util.Log;
 
 import com.example.food_planner.Authentication.AuthListener;
 import com.example.food_planner.Authentication.UserDTO;
+import com.example.food_planner.MealModel.MealModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +37,16 @@ public class AuthModel implements AuthModelInterFace {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
+                        UserDTO userDTO=new UserDTO("name",email,new ArrayList<MealModel>());
+                        Map<String, Object> newUser = new HashMap<>();
+                        newUser.put("userData", userDTO);
+                        database.getReference("users").child(user.getUid()).setValue(userDTO)
+                                .addOnSuccessListener(aVoid -> {
+                                    Log.d("TAG", "New user data saved to database");
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.w("TAG", "Error saving new user data to database", e);
+                                });
                         listener.onSuccessResult(user);
                     } else {
                         listener.onFail(task.getException().getMessage());
@@ -48,7 +60,7 @@ public class AuthModel implements AuthModelInterFace {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
-                UserDTO userDTO=new UserDTO(userName,email,"12345678910");
+                UserDTO userDTO=new UserDTO(userName,email,new ArrayList<MealModel>());
                 Map<String, Object> newUser = new HashMap<>();
                 newUser.put("userData", userDTO);
                 database.getReference("users").child(user.getUid()).setValue(userDTO)

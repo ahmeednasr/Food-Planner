@@ -41,13 +41,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Splash_Screen.SplashScreen"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Authentication.Login.View.LoginView"
             android:exported="false">
             <meta-data

@@ -58,7 +58,6 @@ public class AreaAdabter extends RecyclerView.Adapter<AreaAdabter.ViewHolder> {
         holder.itemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,list.get(position).getStrArea(),Toast.LENGTH_SHORT).show();
                 listener.onAreaClick(requistmsg.getStrArea(),"AREA");
             }
         });

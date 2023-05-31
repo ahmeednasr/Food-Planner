@@ -57,7 +57,6 @@ public class CategoryAdabter extends RecyclerView.Adapter<CategoryAdabter.ViewHo
         holder.itemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,list.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
                 listener.onCategoryClick(requistmsg.getStrCategory(),"CATEGORY");
             }
         });

@@ -136,7 +136,7 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
 
     @Override
     public void onAreaClick(String areaItem,String type) {
-        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(areaItem,type));
+        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(type,areaItem));
     }
     private void dismissProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
@@ -146,6 +146,6 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
 
     @Override
     public void onCategoryClick(String categoryItem,String type) {
-        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(categoryItem,type));
+        controller.navigate(HomeViewDirections.actionHomeFragmentToViewAllMeals(type,categoryItem));
     }
 }

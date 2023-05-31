@@ -18,6 +18,15 @@
             app:destination="@id/viewAllMeals" />
     </fragment>
     <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.example.food_planner.Main.SavedMeals.SavedMealsView.SavedMealView"
+        android:label="saved_fragment"
+        tools:layout="@layout/saved_fragment" >
+        <action
+            android:id="@+id/action_savedFragment_to_viewMeal"
+            app:destination="@id/viewMeal" />
+    </fragment>
+    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.food_planner.Main.Search.SearchFragment"
         android:label="@string/search"
@@ -28,13 +37,8 @@
         android:label="week plan"
         tools:layout="@layout/week_plan_fragment" />
     <fragment
-        android:id="@+id/savedFragment"
-        android:name="com.example.food_planner.Main.SavedMeals.SavedMealsFragment"
-        android:label="saved meals"
-        tools:layout="@layout/saved_meals_fragment" />
-    <fragment
         android:id="@+id/viewMeal"
-        android:name="com.example.food_planner.Main.ViewMeal.ViewMeal"
+        android:name="com.example.food_planner.Main.ViewMeal.MealView.MealView"
         android:label="Meal"
         tools:layout="@layout/view_meal_fragment">
         <argument
@@ -43,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewAllMeals"
-        android:name="com.example.food_planner.Main.ViewAllMeals.View.ViewAllMeals"
+        android:name="com.example.food_planner.Main.ViewAllMeals.View.AllMealsView"
         android:label="view_all_meals_fragment"
         tools:layout="@layout/view_all_meals_fragment" >
         <action
@@ -54,4 +58,5 @@
             app:argType="string" />
         <argument android:name="Value" />
     </fragment>
+
 </navigation>

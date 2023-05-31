@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaResponse;
 import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryResponse;
-import com.example.food_planner.Main.ViewAllMeals.getMealsNetworkDelagate;
+import com.example.food_planner.Main.ViewAllMeals.AllMealModel.ResponseMealItemThumb;
 import com.example.food_planner.MealModel.MealResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -60,7 +60,6 @@ public class ApiClient implements RemoteSource {
                 networkDelegate.onFailureResult(t.getMessage());
             }
         });
-
     }
 
     @Override
@@ -89,9 +88,6 @@ public class ApiClient implements RemoteSource {
                 if (response.isSuccessful() && response.body() != null) {
                     //Log.d("TAG","enqueueAreasCall"+response.body().getCategory().get(0).getStrCategory());
                     networkDelegate.onCategorySuccessResult(response.body());
-
-                } else {
-                    networkDelegate.onFailureResult("Response failed with status code: " + response.code());
                 }
             }
 
@@ -103,59 +99,54 @@ public class ApiClient implements RemoteSource {
     }
 
     @Override
-    public void enqueueMealsByArea(getMealsNetworkDelagate networkDelegate, String area) {
-        retrofit.getMealByArea(area).enqueue(new Callback<MealResponse>() {
+    public void enqueueMealsByArea(String area, getMealsNetworkDelagate networkDelegate) {
+        retrofit.getMealByArea(area).enqueue(new Callback<ResponseMealItemThumb>() {
             @Override
-            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+            public void onResponse(Call<ResponseMealItemThumb> call, Response<ResponseMealItemThumb> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     //Log.d("TAG","enqueueAreasCall"+response.body().getCategory().get(0).getStrCategory());
-                    networkDelegate.onMealsByArea(response.body());
-
-                } else {
-                    networkDelegate.onFail("Response failed with status code: " + response.code());
+                    networkDelegate.getMealsSucces(response.body().getMeals());
                 }
             }
 
             @Override
-            public void onFailure(Call<MealResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseMealItemThumb> call, Throwable t) {
                 networkDelegate.onFail(t.getMessage());
             }
         });
     }
 
     @Override
-    public void enqueueMealsByCategory(getMealsNetworkDelagate networkDelegate,String category) {
-        retrofit.getMealsByCategory(category).enqueue(new Callback<MealResponse>() {
+    public void enqueueMealsByCategory(String category, getMealsNetworkDelagate networkDelegate) {
+        retrofit.getMealsByCategory(category).enqueue(new Callback<ResponseMealItemThumb>() {
             @Override
-            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+            public void onResponse(Call<ResponseMealItemThumb> call, Response<ResponseMealItemThumb> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     //Log.d("TAG","enqueueAreasCall"+response.body().getCategory().get(0).getStrCategory());
-                    networkDelegate.onMealsByCategory(response.body());
+                    networkDelegate.getMealsSucces(response.body().getMeals());
 
-                } else {
-                    networkDelegate.onFail("Response failed with status code: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<MealResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseMealItemThumb> call, Throwable t) {
                 networkDelegate.onFail(t.getMessage());
             }
         });
     }
 
     @Override
-    public void enqueueMealsById(getMealsNetworkDelagate networkDelegate,String id) {
+    public void enqueueMealsById(String id, getMealsNetworkDelagate networkDelegate) {
         retrofit.getMealById(id).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    networkDelegate.onMealByIdSuccessResult(response.body());
-
+                     networkDelegate.onMealByIdSuccess(response.body().getMeals().get(0));
                 } else {
                     networkDelegate.onFail("Response failed with status code: " + response.code());
                 }
             }
+
             @Override
             public void onFailure(Call<MealResponse> call, Throwable t) {
                 networkDelegate.onFail(t.getMessage());

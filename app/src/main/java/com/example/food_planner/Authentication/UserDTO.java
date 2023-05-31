@@ -1,17 +1,19 @@
 package com.example.food_planner.Authentication;
 
+import com.example.food_planner.MealModel.MealModel;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class UserDTO implements Serializable {
     String userName;
     String email;
-    String number;
-    //ArrayList<MealDTO> savedMeals=new ArrayList<>();
+    List<MealModel> meals;
 
-    public UserDTO(String userName, String email,String number) {
+    public UserDTO(String userName, String email, List<MealModel> meals) {
         this.userName = userName;
         this.email = email;
-        this.number=number;
+        this.meals = meals;
     }
 
     public String getUserName() {
@@ -30,11 +32,11 @@ public class UserDTO implements Serializable {
         this.email = email;
     }
 
-    public String getNumber() {
-        return number;
+    public List<MealModel> getMeals() {
+        return meals;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setMeals(List<MealModel> meals) {
+        this.meals = meals;
     }
 }

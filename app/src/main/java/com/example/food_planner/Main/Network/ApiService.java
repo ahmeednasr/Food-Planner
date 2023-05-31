@@ -2,6 +2,7 @@ package com.example.food_planner.Main.Network;
 
 import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaResponse;
 import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryResponse;
+import com.example.food_planner.Main.ViewAllMeals.AllMealModel.ResponseMealItemThumb;
 import com.example.food_planner.MealModel.MealResponse;
 
 import retrofit2.Call;
@@ -19,10 +20,10 @@ public interface ApiService {
     Call<MealResponse> getMeal();
 
     @GET("filter.php")
-    Call<MealResponse> getMealsByCategory(@Query("c") String category);
+    Call<ResponseMealItemThumb> getMealsByCategory(@Query("c") String category);
 
     @GET("filter.php")
-    Call<MealResponse> getMealByArea(@Query("a") String area);
+    Call<ResponseMealItemThumb> getMealByArea(@Query("a") String area);
 
     @GET("lookup.php")
     Call<MealResponse> getMealById(@Query("i") String id);

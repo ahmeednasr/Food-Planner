@@ -1,4 +1,4 @@
-package com.example.food_planner.Main.ViewMeal;
+package com.example.food_planner.Main.ViewMeal.MealView;
 
 import android.os.Bundle;
 
@@ -11,11 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.food_planner.DataBase.ContractLocalSource;
+import com.example.food_planner.DataBase.LocalSource;
+import com.example.food_planner.Main.ViewMeal.MealPresenter.MealPresenter;
+import com.example.food_planner.Main.ViewMeal.MealPresenter.MealPresenterInterface;
+import com.example.food_planner.Main.ViewMeal.MealRepo.MealRepo;
 import com.example.food_planner.MealModel.MealModel;
 import com.example.food_planner.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -24,11 +31,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ViewMeal extends Fragment {
+public class MealView extends Fragment implements MealViewInterface {
     TextView mealName,area,category,instractions,ingrediant;
     MealModel mealModel;
     AppCompatImageView imageView;
     YouTubePlayerView youTubePlayerView;
+    FloatingActionButton addFavButton;
+    MealPresenterInterface presenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,20 +52,22 @@ public class ViewMeal extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mealName=view.findViewById(R.id.mealNameValue);
-        area=view.findViewById(R.id.areaValue);
-        category=view.findViewById(R.id.categoryValue);
-        instractions=view.findViewById(R.id.instractionsValue);
-        ingrediant=view.findViewById(R.id.mealIngredients);
-        imageView=view.findViewById(R.id.mealImage_id);
+        //presenter=new
+        initUI(view);
+        mealModel=MealViewArgs.fromBundle(getArguments()).getMeal();
+        presenter=new MealPresenter(this, MealRepo.getInstance(ContractLocalSource.getInstance(getContext()),getContext()));
 
-        mealModel=ViewMealArgs.fromBundle(getArguments()).getMeal();
-
+        addFavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addMeal(mealModel);
+                Toast.makeText(getContext(), "done", Toast.LENGTH_SHORT).show();
+            }
+        });
         Glide.with(getContext()).load(mealModel.getStrMealThumb())
                 .apply(new RequestOptions().override(400,300))
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background).into(imageView);
-
         mealName.setText(mealModel.getStrMeal());
         area.setText(mealModel.getStrArea());
         category.setText(mealModel.getStrCategory());
@@ -65,6 +76,7 @@ public class ViewMeal extends Fragment {
         getLifecycle().addObserver(youTubePlayerView);
         getYoutubeVideo();
         StringBuilder sb = new StringBuilder();
+
         for (int i = 1; i <= 20; i++) {
             String ingredients = null;
             String measure=null;
@@ -80,6 +92,16 @@ public class ViewMeal extends Fragment {
             }
         }
         ingrediant.setText(sb.toString());
+    }
+
+    private void initUI(View view) {
+        mealName=view.findViewById(R.id.mealNameValue);
+        area=view.findViewById(R.id.areaValue);
+        category=view.findViewById(R.id.categoryValue);
+        instractions=view.findViewById(R.id.instractionsValue);
+        ingrediant=view.findViewById(R.id.mealIngredients);
+        imageView=view.findViewById(R.id.mealImage_id);
+        addFavButton=view.findViewById(R.id.addFavBtn);
     }
 
     private String extractVideoIdFromLink(String videoLink) {
@@ -100,5 +122,10 @@ public class ViewMeal extends Fragment {
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
+    }
+
+    @Override
+    public void addMeal(MealModel meal) {
+        presenter.addToFav(meal);
     }
 }

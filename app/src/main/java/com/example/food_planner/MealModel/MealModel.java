@@ -1,8 +1,17 @@
 package com.example.food_planner.MealModel;
 
+import androidx.annotation.NonNull;
+import androidx.room.Dao;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Dao
+@Entity
 public class MealModel implements Serializable {
+    @PrimaryKey
+    @NonNull
     private String idMeal;
     private String strMeal;
     private String strCategory;
