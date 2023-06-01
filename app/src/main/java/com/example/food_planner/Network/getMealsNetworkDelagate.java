@@ -1,8 +1,7 @@
 package com.example.food_planner.Network;
 
-import com.example.food_planner.Main.ViewAllMeals.AllMealModel.MealsItemThumb;
+import com.example.food_planner.ViewAllMeals.AllMealModel.MealsItemThumb;
 import com.example.food_planner.MealModel.MealModel;
-import com.example.food_planner.MealModel.MealResponse;
 
 import java.util.List;
 

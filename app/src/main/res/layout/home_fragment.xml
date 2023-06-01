@@ -5,7 +5,7 @@
     android:id="@+id/homeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main.HomePage.HomeView.HomeView">
+    tools:context=".HomePage.HomeView.HomeView">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -10,8 +10,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.food_planner.Main.MainNavigation;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

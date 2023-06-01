@@ -2,9 +2,9 @@ package com.example.food_planner.Network;
 
 import android.util.Log;
 
-import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaResponse;
-import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryResponse;
-import com.example.food_planner.Main.ViewAllMeals.AllMealModel.ResponseMealItemThumb;
+import com.example.food_planner.HomePage.HomeRepo.AreaModel.AreaResponse;
+import com.example.food_planner.HomePage.HomeRepo.CategoryModel.CategoryResponse;
+import com.example.food_planner.ViewAllMeals.AllMealModel.ResponseMealItemThumb;
 import com.example.food_planner.MealModel.MealResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

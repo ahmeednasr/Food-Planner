@@ -11,9 +11,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.food_planner.Authentication.AuthModel.AuthModel;
-import com.example.food_planner.Authentication.Login.View.LoginView;
 import com.example.food_planner.Authentication.SignUP.Presenter.SignUpPresenter;
-import com.example.food_planner.Main.MainNavigation;
+import com.example.food_planner.MainNavigation;
 import com.example.food_planner.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;

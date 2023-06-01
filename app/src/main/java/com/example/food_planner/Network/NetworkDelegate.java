@@ -1,7 +1,7 @@
 package com.example.food_planner.Network;
 
-import com.example.food_planner.Main.HomePage.HomeRepo.AreaModel.AreaResponse;
-import com.example.food_planner.Main.HomePage.HomeRepo.CategoryModel.CategoryResponse;
+import com.example.food_planner.HomePage.HomeRepo.AreaModel.AreaResponse;
+import com.example.food_planner.HomePage.HomeRepo.CategoryModel.CategoryResponse;
 import com.example.food_planner.MealModel.MealModel;
 
 public interface NetworkDelegate {

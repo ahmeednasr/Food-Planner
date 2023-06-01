@@ -34,7 +34,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Main.MainNavigation"
+            android:name=".MainNavigation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

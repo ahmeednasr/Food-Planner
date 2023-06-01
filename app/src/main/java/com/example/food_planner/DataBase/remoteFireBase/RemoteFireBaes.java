@@ -3,13 +3,11 @@ package com.example.food_planner.DataBase.remoteFireBase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.example.food_planner.DayDTO;
-import com.example.food_planner.Main.SavedMeals.FavMealsNetworkDelegate;
-import com.example.food_planner.Main.WeekPlan.WeekPlanDelegate;
+import com.example.food_planner.DTO.DayDTO;
+import com.example.food_planner.SavedMeals.FavMealsNetworkDelegate;
+import com.example.food_planner.WeekPlan.WeekPlanDelegate;
 import com.example.food_planner.MealModel.MealModel;
-import com.example.food_planner.UserDTO;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

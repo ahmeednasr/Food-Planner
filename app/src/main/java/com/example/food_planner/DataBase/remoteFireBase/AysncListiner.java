@@ -1,8 +1,8 @@
 package com.example.food_planner.DataBase.remoteFireBase;
 
-import com.example.food_planner.DayDTO;
+import com.example.food_planner.DTO.DayDTO;
 import com.example.food_planner.MealModel.MealModel;
-import com.example.food_planner.UserDTO;
+import com.example.food_planner.DTO.UserDTO;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.example.food_planner.DataBase.remoteFireBase;
 
-import com.example.food_planner.DayDTO;
-import com.example.food_planner.Main.SavedMeals.FavMealsNetworkDelegate;
-import com.example.food_planner.Main.WeekPlan.WeekPlanDelegate;
+import com.example.food_planner.DTO.DayDTO;
+import com.example.food_planner.SavedMeals.FavMealsNetworkDelegate;
+import com.example.food_planner.WeekPlan.WeekPlanDelegate;
 import com.example.food_planner.MealModel.MealModel;
 
 import java.util.List;
