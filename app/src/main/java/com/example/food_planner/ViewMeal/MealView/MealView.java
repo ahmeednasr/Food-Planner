@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +75,7 @@ public class MealView extends Fragment implements MealViewInterface {
         }
         if (networkInfo != null && networkInfo.isConnected()) {
             getLifecycle().addObserver(youTubePlayerView);
-            getYoutubeVideo();
+            executeInBackground();
         } else {
             addFavButton.setVisibility(View.GONE);
         }
@@ -135,18 +137,33 @@ public class MealView extends Fragment implements MealViewInterface {
         return videoId;
     }
 
-    private void getYoutubeVideo() {
-        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+    private void executeInBackground() {
+        new Thread(new Runnable() {
             @Override
-            public void onReady(YouTubePlayer youTubePlayer) {
-                String videoId = extractVideoIdFromLink(mealModel.getStrYoutube());
+            public void run() {
+                final String videoId = extractVideoIdFromLink(mealModel.getStrYoutube());
                 if (videoId != null) {
-                    youTubePlayer.loadVideo(videoId, 0);
-                    youTubePlayer.pause();
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadYouTubeVideo(videoId);
+                        }
+                    });
                 } else {
                     // Handle null videoId
                     Log.e("getYoutubeVideo", "Video ID is null");
                 }
+            }
+        }).start();
+    }
+
+    private void loadYouTubeVideo(String videoId) {
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(YouTubePlayer youTubePlayer) {
+                youTubePlayer.loadVideo(videoId, 0);
+                youTubePlayer.pause();
             }
         });
     }

@@ -78,13 +78,16 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
             progressDialog.show();
             presenterInterface = new HomePresenter(this,
                     HomeRepo.getInstance(ApiClient.getInstance()));
-            presenterInterface.getMealOfDay();
-            presenterInterface.getArea();
-            presenterInterface.getCategory();
+            new Thread(() -> {
+                presenterInterface.getMealOfDay();
+                presenterInterface.getArea();
+                presenterInterface.getCategory();
+            }).start();
         } else {
-            Toast.makeText(getContext(), "no connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No connection", Toast.LENGTH_SHORT).show();
             mealOfDay.setEnabled(false);
         }
+
 
 
         mealOfDay.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +96,7 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
                 if (meal != null) {
                     Log.d("Tag", "onclick " + meal.getStrMeal());
                     controller.navigate(HomeViewDirections.actionHomeFragmentToViewMeal(meal, "HOME"));
+
                 }
             }
         });
@@ -125,17 +129,18 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
         mealName.setVisibility(View.GONE);
 
     }
-
     @Override
     public void getMealOfDay(MealModel model) {
-        mealName.setText(model.getStrMeal());
-        Glide.with(getContext()).load(model.getStrMealThumb())
-                .apply(new RequestOptions().override(400, 300))
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_background).into(imageMeal);
-        meal = model;
-        imageMeal.setVisibility(View.VISIBLE);
-        mealName.setVisibility(View.VISIBLE);
+        getActivity().runOnUiThread(() -> {
+            mealName.setText(model.getStrMeal());
+            Glide.with(getContext()).load(model.getStrMealThumb())
+                    .apply(new RequestOptions().override(400, 300))
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_background).into(imageMeal);
+            meal = model;
+            imageMeal.setVisibility(View.VISIBLE);
+            mealName.setVisibility(View.VISIBLE);
+        });
     }
 
     @Override
