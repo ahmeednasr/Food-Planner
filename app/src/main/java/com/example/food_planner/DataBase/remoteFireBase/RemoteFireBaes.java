@@ -9,6 +9,7 @@ import com.example.food_planner.SavedMeals.FavMealsNetworkDelegate;
 import com.example.food_planner.WeekPlan.WeekPlanDelegate;
 import com.example.food_planner.MealModel.MealModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +25,7 @@ public class RemoteFireBaes implements RemoteFireBaseInterFace {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference userRef;
+
     String userId;
     private RemoteFireBaes(FirebaseAuth auth, String userId) {
         mAuth = auth;
@@ -41,7 +43,21 @@ public class RemoteFireBaes implements RemoteFireBaseInterFace {
 
     @Override
     public void insertMealRemote( MealModel meal, AysncListiner listiner) {
-        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("meals");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user == null) {
+            // User is not authenticated, handle the error
+            listiner.onFail("User not authenticated");
+            return;
+        }
+
+        String userId = user.getUid();
+        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(userId)
+                .child("meals");
+
         Query query = mealsRef.orderByChild("idMeal").equalTo(meal.getIdMeal());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -50,8 +66,7 @@ public class RemoteFireBaes implements RemoteFireBaseInterFace {
                     // Meal with the same idMeal already exists, handle the error
                     listiner.onFail("Meal with the same ID already exists");
                 } else {
-                    // Meal does not exist, add it to the database
-                    DatabaseReference mealRef = userRef.child("meals").push();
+                    DatabaseReference mealRef = mealsRef.push();
                     mealRef.setValue(meal)
                             .addOnSuccessListener(aVoid -> {
                                 Log.d("TAG", "Meal data added successfully");
@@ -73,25 +88,38 @@ public class RemoteFireBaes implements RemoteFireBaseInterFace {
 
     @Override
     public void getUserMeals(FavMealsNetworkDelegate listiner) {
-        DatabaseReference mealsRef = userRef.child("meals");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user == null) {
+            // User is not authenticated, handle the error
+            listiner.onFail("User not authenticated");
+            return;
+        }
+        String userId = user.getUid();
+        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(userId)
+                .child("meals");
+
         Log.i("TAG","reqist getUserMeals in remotefirebase before");
 
         mealsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("TAG","reqist getUserMeals in remotefirebase medil");
-
                 List<MealModel> meals = new ArrayList<>();
+
                 for (DataSnapshot mealSnapshot : snapshot.getChildren()) {
                     MealModel meal = mealSnapshot.getValue(MealModel.class);
                     meals.add(meal);
-                    Log.i("TAG","reqist getUserMeals in remotefirebase before");
                 }
+
                 listiner.onGetMealsSuccess(meals);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                listiner.onFail(error.toString());
+                listiner.onFail(error.getMessage());
             }
         });
     }
@@ -128,7 +156,21 @@ public class RemoteFireBaes implements RemoteFireBaseInterFace {
 
     @Override
     public void removeMeal(MealModel meal, FavMealsNetworkDelegate listiner) {
-        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("meals");
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user == null) {
+            // User is not authenticated, handle the error
+            listiner.onFail("User not authenticated");
+            return;
+        }
+
+        String userId = user.getUid();
+        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(userId)
+                .child("meals");
         Query query = mealsRef.orderByChild("idMeal").equalTo(meal.getIdMeal());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -141,7 +183,7 @@ public class RemoteFireBaes implements RemoteFireBaseInterFace {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("Error deleting meal: " + error.getMessage());
+                listiner.onFail(error.getMessage());
             }
         });
     }

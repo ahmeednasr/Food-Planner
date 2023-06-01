@@ -24,7 +24,6 @@ import com.example.food_planner.DataBase.ContractLocalSource;
 import com.example.food_planner.ViewMeal.MealPresenter.MealPresenter;
 import com.example.food_planner.ViewMeal.MealPresenter.MealPresenterInterface;
 import com.example.food_planner.ViewMeal.MealRepo.MealRepo;
-import com.example.food_planner.Main.ViewMeal.MealView.MealViewArgs;
 import com.example.food_planner.MealModel.MealModel;
 import com.example.food_planner.R;
 import com.example.food_planner.DataBase.remoteFireBase.RemoteFireBaes;

@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.Task;
 
 public class WelcomActivity extends AppCompatActivity {
     ImageButton signUpGoogle;
-    AppCompatButton signUpEmailBtn,loginBtn;
+    AppCompatButton signUpEmailBtn,loginBtn,skip;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     @Override
@@ -33,11 +33,17 @@ public class WelcomActivity extends AppCompatActivity {
         signUpGoogle=findViewById(R.id.signUpGoogle_id);
         signUpEmailBtn=findViewById(R.id.signUpEmailBtn);
         loginBtn=findViewById(R.id.loginBtn_id);
+        skip=findViewById(R.id.skipBtn_id);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(WelcomActivity.this, "done", Toast.LENGTH_SHORT).show();
+            }
+        });
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc= GoogleSignIn.getClient(this,gso);
         signUpGoogle.setOnClickListener((view)->{
             signIn();
-
         });
         signUpEmailBtn.setOnClickListener(new View.OnClickListener() {
             @Override

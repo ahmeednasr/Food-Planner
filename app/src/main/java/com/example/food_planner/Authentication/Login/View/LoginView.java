@@ -83,7 +83,9 @@ public class LoginView extends AppCompatActivity implements LoginViewInterface {
     @Override
     public void loginSuccess(FirebaseUser user) {
         String userId = user.getUid();
-        Toast.makeText(LoginView.this, "welcome " + user.getEmail(),
+//        Toast.makeText(LoginView.this, "welcome " + user.getEmail(),
+//                Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginView.this, "welcome " + user.getUid(),
                 Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = getSharedPreferences("PREFS", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
