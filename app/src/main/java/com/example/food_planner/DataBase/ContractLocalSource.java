@@ -50,6 +50,29 @@ public class ContractLocalSource implements LocalSource {
     }
 
     @Override
+    public void insertRoom(List<MealModel> meals) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (MealModel meal : meals) {
+                    dao.insertMeal(meal);
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void resetRoom() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dao.deleteAllMeals();
+            }
+        }).start();
+
+    }
+
+    @Override
     public LiveData<List<MealModel>> getAllStoredMeal() {
         return storedMeals;
     }

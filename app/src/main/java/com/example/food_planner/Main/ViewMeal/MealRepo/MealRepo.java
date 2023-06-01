@@ -2,14 +2,11 @@ package com.example.food_planner.Main.ViewMeal.MealRepo;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.food_planner.DataBase.LocalSource;
+import com.example.food_planner.Main.SavedMeals.FavMealsNetworkDelegate;
 import com.example.food_planner.MealModel.MealModel;
-import com.example.food_planner.remoteFireBase.AysncListiner;
-import com.example.food_planner.remoteFireBase.RemoteFireBaseInterFace;
-
-import java.util.List;
+import com.example.food_planner.DataBase.remoteFireBase.AysncListiner;
+import com.example.food_planner.DataBase.remoteFireBase.RemoteFireBaseInterFace;
 
 public class MealRepo implements MealRepoInterFace {
     private Context context;
@@ -37,5 +34,13 @@ public class MealRepo implements MealRepoInterFace {
         localSource.insertMeal(mealModel);
     }
 
+    @Override
+    public void removeMeal(MealModel meal, FavMealsNetworkDelegate listiner) {
+        remoteFireBase.removeMeal(meal,listiner);
+    }
 
+    @Override
+    public void getSavedMeals( FavMealsNetworkDelegate listiner) {
+        remoteFireBase.getUserMeals(listiner);
+    }
 }

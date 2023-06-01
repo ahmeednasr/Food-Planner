@@ -9,6 +9,8 @@ import java.util.List;
 public interface LocalSource {
     void insertMeal(MealModel meal);
     void deleteMeal(MealModel meal);
+    void insertRoom(List<MealModel> meals);
+    void resetRoom();
     LiveData<List<MealModel>> getAllStoredMeal();
     MealModel getImageCached();
 }

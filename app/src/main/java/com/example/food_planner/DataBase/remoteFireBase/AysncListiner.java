@@ -1,4 +1,4 @@
-package com.example.food_planner.remoteFireBase;
+package com.example.food_planner.DataBase.remoteFireBase;
 
 import com.example.food_planner.DayDTO;
 import com.example.food_planner.MealModel.MealModel;
@@ -11,5 +11,4 @@ public interface AysncListiner {
     void uploadMeal(MealModel meal);
     void getUserData(UserDTO user);
     void onFail(String msg);
-
 }

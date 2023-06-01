@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.food_planner.DataBase.ContractLocalSource;
-import com.example.food_planner.DataBase.LocalSource;
 import com.example.food_planner.Main.ViewMeal.MealPresenter.MealPresenter;
 import com.example.food_planner.Main.ViewMeal.MealPresenter.MealPresenterInterface;
 import com.example.food_planner.Main.ViewMeal.MealRepo.MealRepo;
 import com.example.food_planner.MealModel.MealModel;
 import com.example.food_planner.R;
-import com.example.food_planner.remoteFireBase.RemoteFireBaes;
+import com.example.food_planner.DataBase.remoteFireBase.RemoteFireBaes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -68,13 +68,13 @@ public class MealView extends Fragment implements MealViewInterface {
         initUI(view);
         mealModel = MealViewArgs.fromBundle(getArguments()).getMeal();
         flag = MealViewArgs.fromBundle(getArguments()).getFragmentFlag();
-        if(Objects.equals(flag, "ROOM")){
+        if (Objects.equals(flag, "ROOM")) {
             addFavButton.setVisibility(View.GONE);
         }
         if (networkInfo != null && networkInfo.isConnected()) {
             getLifecycle().addObserver(youTubePlayerView);
             getYoutubeVideo();
-        }else {
+        } else {
             addFavButton.setVisibility(View.GONE);
         }
         presenter = new MealPresenter(this, MealRepo.getInstance(getContext(), ContractLocalSource.getInstance(getContext()), RemoteFireBaes.getInstance(token)));
@@ -140,8 +140,13 @@ public class MealView extends Fragment implements MealViewInterface {
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
                 String videoId = extractVideoIdFromLink(mealModel.getStrYoutube());
-                youTubePlayer.loadVideo(videoId, 0);
-                youTubePlayer.pause();
+                if (videoId != null) {
+                    youTubePlayer.loadVideo(videoId, 0);
+                    youTubePlayer.pause();
+                } else {
+                    // Handle null videoId
+                    Log.e("getYoutubeVideo", "Video ID is null");
+                }
             }
         });
     }

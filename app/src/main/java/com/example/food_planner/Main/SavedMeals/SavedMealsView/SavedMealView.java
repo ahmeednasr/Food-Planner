@@ -1,6 +1,7 @@
 package com.example.food_planner.Main.SavedMeals.SavedMealsView;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,12 +19,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.food_planner.DataBase.ContractLocalSource;
-import com.example.food_planner.Main.HomePage.HomeView.HomeViewDirections;
+import com.example.food_planner.DataBase.LocalSource;
+import com.example.food_planner.DataBase.remoteFireBase.RemoteFireBaes;
 import com.example.food_planner.Main.SavedMeals.SavedMealsPresenter.SavedMealsPresenter;
-import com.example.food_planner.Main.SavedMeals.SavedMealsRepo.SavedMealsrepo;
+import com.example.food_planner.Main.SavedMeals.SavedMealsPresenter.SavedMealsPresenterInterFace;
+import com.example.food_planner.Main.SavedMeals.SavedMealsRepo.SavedMealsRepo;
 import com.example.food_planner.MealModel.MealModel;
 import com.example.food_planner.R;
 
@@ -32,7 +34,7 @@ import java.util.List;
 
 
 public class SavedMealView extends Fragment implements onSavedMealsClickListener,SavedMealsViewInterFace{
-    SavedMealsPresenter presenter;
+    SavedMealsPresenterInterFace presenter;
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     SavedMealsAdapter adapter;
@@ -54,14 +56,29 @@ public class SavedMealView extends Fragment implements onSavedMealsClickListener
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
        boolean connection=(networkInfo != null && networkInfo.isConnected());
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("PREFS", 0);
+        String token = sharedPreferences.getString("TOKEN", "");
         initUI(view,connection);
-        presenter=new SavedMealsPresenter(this, SavedMealsrepo.getInstance(ContractLocalSource.getInstance(getContext()),getContext()));
-        presenter.getSavedMeals().observe(getViewLifecycleOwner(), new Observer<List<MealModel>>() {
-            @Override
-            public void onChanged(List<MealModel> products) {
-                showMeals(products);
-            }
-        });
+        presenter= new SavedMealsPresenter(this,SavedMealsRepo.getInstance(getContext(), ContractLocalSource.getInstance(getContext()), RemoteFireBaes.getInstance(token),connection));
+        Log.i("TAG","status connection " +connection);
+        if(connection){
+            Log.i("TAG","reqist persenter in veiw");
+            presenter.getRemoteSavedMeals();
+            presenter.getLocalSavedMeals().observe(getViewLifecycleOwner(), new Observer<List<MealModel>>() {
+                @Override
+                public void onChanged(List<MealModel> products) {
+                    showMeals(products);
+                }
+            });
+        }else{
+            Log.i("TAG","reqist persenter in local view");
+            presenter.getLocalSavedMeals().observe(getViewLifecycleOwner(), new Observer<List<MealModel>>() {
+                @Override
+                public void onChanged(List<MealModel> products) {
+                    showMeals(products);
+                }
+            });
+        }
     }
     private void initUI(View view,boolean connection) {
         controller= Navigation.findNavController(view);
@@ -78,12 +95,13 @@ public class SavedMealView extends Fragment implements onSavedMealsClickListener
 
     @Override
     public void onRemove(MealModel meal) {
-        presenter.removeFromFav(meal);
+        presenter.removeRemoteSavedMeal(meal);
     }
 
     @Override
     public void showMeals(List<MealModel> meals) {
+        Log.i("TAG","showMeals in vew");
         adapter.setList(meals);
-        adapter.notifyDataSetChanged();
+       adapter.notifyDataSetChanged();
     }
 }

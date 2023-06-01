@@ -5,7 +5,7 @@ import com.example.food_planner.Main.ViewMeal.MealRepo.MealRepoInterFace;
 import com.example.food_planner.Main.ViewMeal.MealView.MealViewInterface;
 import com.example.food_planner.MealModel.MealModel;
 import com.example.food_planner.UserDTO;
-import com.example.food_planner.remoteFireBase.AysncListiner;
+import com.example.food_planner.DataBase.remoteFireBase.AysncListiner;
 
 import java.util.List;
 
