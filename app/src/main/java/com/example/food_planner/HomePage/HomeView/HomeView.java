@@ -95,8 +95,8 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
             public void onClick(View v) {
                 if (meal != null) {
                     Log.d("Tag", "onclick " + meal.getStrMeal());
-                    controller.navigate(HomeViewDirections.actionHomeFragmentToViewMeal(meal, "HOME"));
-
+                   // controller.navigate(HomeViewDirections.actionHomeFragmentToViewMeal(meal, "HOME"));
+                    controller.navigate(HomeViewDirections.actionHomeFragmentToViewMeal(meal,"HOME"));
                 }
             }
         });

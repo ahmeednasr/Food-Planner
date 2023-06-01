@@ -61,6 +61,9 @@
             android:name="type"
             app:argType="string" />
         <argument android:name="Value" />
+        <action
+            android:id="@+id/action_viewAllMeals_to_viewMeal2"
+            app:destination="@id/viewMeal" />
     </fragment>
 
 </navigation>
