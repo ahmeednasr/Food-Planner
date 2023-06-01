@@ -37,7 +37,9 @@ public class WelcomActivity extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(WelcomActivity.this, "done", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(WelcomActivity.this, MainNavigation.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
             }
         });
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();

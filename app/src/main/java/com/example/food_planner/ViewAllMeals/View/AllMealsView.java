@@ -73,7 +73,9 @@ public class AllMealsView extends Fragment implements AllMealsViewInterface,OnMe
     @Override
     public void getMeal(MealModel meal) {
        Log.i("TAG","OK meal name: "+meal.getStrMeal());
-       controller.navigate(AllMealsViewDirections.actionViewAllMealsToViewMeal(meal,"ALLMEALS"));
+      // controller.navigate(AllMealsViewDirections.actionViewAllMealsToViewMeal(meal,"ALLMEALS"));
+        controller.navigate(AllMealsViewDirections.actionViewAllMealsToViewMeal(meal,"ALLMEALS"));
+
     }
     @Override
     public void responseMsg(String msg) {

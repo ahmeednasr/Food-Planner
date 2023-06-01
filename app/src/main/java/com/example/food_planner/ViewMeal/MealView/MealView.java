@@ -75,7 +75,7 @@ public class MealView extends Fragment implements MealViewInterface {
         }
         if (networkInfo != null && networkInfo.isConnected()) {
             getLifecycle().addObserver(youTubePlayerView);
-            executeInBackground();
+            getYoutubeVideo();
         } else {
             addFavButton.setVisibility(View.GONE);
         }
@@ -136,28 +136,21 @@ public class MealView extends Fragment implements MealViewInterface {
         }
         return videoId;
     }
-
-    private void executeInBackground() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final String videoId = extractVideoIdFromLink(mealModel.getStrYoutube());
-                if (videoId != null) {
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadYouTubeVideo(videoId);
+    private void getYoutubeVideo() {
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                    @Override
+                    public void onReady(YouTubePlayer youTubePlayer) {
+                        String videoId = extractVideoIdFromLink(mealModel.getStrYoutube());
+                            if (videoId != null) {
+                                youTubePlayer.loadVideo(videoId, 0);
+                                youTubePlayer.pause();
+                            } else {
+                                // Handle null videoId
+                                Log.e("getYoutubeVideo", "Video ID is null");
+                            }
                         }
-                    });
-                } else {
-                    // Handle null videoId
-                    Log.e("getYoutubeVideo", "Video ID is null");
-                }
-            }
-        }).start();
+        });
     }
-
     private void loadYouTubeVideo(String videoId) {
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override

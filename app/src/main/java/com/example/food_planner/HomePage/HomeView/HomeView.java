@@ -88,8 +88,6 @@ public class HomeView extends Fragment implements HomeViewInterface, OnAreaClick
             mealOfDay.setEnabled(false);
         }
 
-
-
         mealOfDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
